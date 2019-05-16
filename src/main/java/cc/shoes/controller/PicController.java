@@ -66,6 +66,9 @@ public class PicController {
 				if (1 == i) {
 					pic.setIsfirst(1);
 				}
+				/**
+				 * 对数据库操作要写到service层去
+				 */
 				pic.setCreatetime(new Date());
 				pic.setMallid(mallId);
 				pic.setPicpath(baseUrl + "/" + filePath + newName);
