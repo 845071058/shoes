@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.shoes.mapper.ImageMapper">
+  <resultMap id="BaseResultMap" type="cc.shoes.entity.Image">
+    <id column="imageId" jdbcType="INTEGER" property="imageid" />
+    <result column="mallId" jdbcType="INTEGER" property="mallid" />
+    <result column="isFirst" jdbcType="INTEGER" property="isfirst" />
+    <result column="imageNum" jdbcType="INTEGER" property="imagenum" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cc.shoes.entity.Image">
+    <result column="imageBase" jdbcType="LONGVARBINARY" property="imagebase" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    imageId, mallId, isFirst, imageNum, createTime, updateTime
+  </sql>
+  <sql id="Blob_Column_List">
+    imageBase
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="cc.shoes.entity.ImageExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from image
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="cc.shoes.entity.ImageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from image
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from image
+    where imageId = #{imageid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from image
+    where imageId = #{imageid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cc.shoes.entity.ImageExample">
+    delete from image
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cc.shoes.entity.Image">
+    insert into image (imageId, mallId, isFirst, 
+      imageNum, createTime, updateTime, 
+      imageBase)
+    values (#{imageid,jdbcType=INTEGER}, #{mallid,jdbcType=INTEGER}, #{isfirst,jdbcType=INTEGER}, 
+      #{imagenum,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{imagebase,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="cc.shoes.entity.Image">
+    insert into image
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="imageid != null">
+        imageId,
+      </if>
+      <if test="mallid != null">
+        mallId,
+      </if>
+      <if test="isfirst != null">
+        isFirst,
+      </if>
+      <if test="imagenum != null">
+        imageNum,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+      <if test="imagebase != null">
+        imageBase,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="imageid != null">
+        #{imageid,jdbcType=INTEGER},
+      </if>
+      <if test="mallid != null">
+        #{mallid,jdbcType=INTEGER},
+      </if>
+      <if test="isfirst != null">
+        #{isfirst,jdbcType=INTEGER},
+      </if>
+      <if test="imagenum != null">
+        #{imagenum,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imagebase != null">
+        #{imagebase,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cc.shoes.entity.ImageExample" resultType="java.lang.Long">
+    select count(*) from image
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update image
+    <set>
+      <if test="record.imageid != null">
+        imageId = #{record.imageid,jdbcType=INTEGER},
+      </if>
+      <if test="record.mallid != null">
+        mallId = #{record.mallid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isfirst != null">
+        isFirst = #{record.isfirst,jdbcType=INTEGER},
+      </if>
+      <if test="record.imagenum != null">
+        imageNum = #{record.imagenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null">
+        updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.imagebase != null">
+        imageBase = #{record.imagebase,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update image
+    set imageId = #{record.imageid,jdbcType=INTEGER},
+      mallId = #{record.mallid,jdbcType=INTEGER},
+      isFirst = #{record.isfirst,jdbcType=INTEGER},
+      imageNum = #{record.imagenum,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      imageBase = #{record.imagebase,jdbcType=LONGVARBINARY}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update image
+    set imageId = #{record.imageid,jdbcType=INTEGER},
+      mallId = #{record.mallid,jdbcType=INTEGER},
+      isFirst = #{record.isfirst,jdbcType=INTEGER},
+      imageNum = #{record.imagenum,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cc.shoes.entity.Image">
+    update image
+    <set>
+      <if test="mallid != null">
+        mallId = #{mallid,jdbcType=INTEGER},
+      </if>
+      <if test="isfirst != null">
+        isFirst = #{isfirst,jdbcType=INTEGER},
+      </if>
+      <if test="imagenum != null">
+        imageNum = #{imagenum,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imagebase != null">
+        imageBase = #{imagebase,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where imageId = #{imageid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cc.shoes.entity.Image">
+    update image
+    set mallId = #{mallid,jdbcType=INTEGER},
+      isFirst = #{isfirst,jdbcType=INTEGER},
+      imageNum = #{imagenum,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      imageBase = #{imagebase,jdbcType=LONGVARBINARY}
+    where imageId = #{imageid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cc.shoes.entity.Image">
+    update image
+    set mallId = #{mallid,jdbcType=INTEGER},
+      isFirst = #{isfirst,jdbcType=INTEGER},
+      imageNum = #{imagenum,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where imageId = #{imageid,jdbcType=INTEGER}
+  </update>
+</mapper>
