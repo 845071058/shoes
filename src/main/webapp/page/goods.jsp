@@ -7,13 +7,17 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<!-- VENDOR CSS -->
+	<script src="../assets/vendor/jquery/jquery.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="../assets/vendor/jquery/bootstrap-table.js"></script>
+	<script src="../assets/vendor/jquery/bootstrap-table-zh-CN.js"></script>
 	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script> -->
 <script src="https://cdn.bootcss.com/moment.js/2.22.0/moment-with-locales.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 	<link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap-table.css">
 	<link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="../assets/vendor/linearicons/style.css">
 	<link rel="stylesheet" href="../assets/vendor/chartist/css/chartist-custom.css">
@@ -166,21 +170,21 @@
         </div>
     </form>
 	<!-- 表格开始 -->
-			<div>
-			<table data-toggle="table" data-url="http://localhost:8888/shoes/mall/mallTable" id="table">
-<!--     	<thead> -->
-<!--         <tr> -->
-<!--             <th data-field="mallid">商品ID</th> -->
-<!--             <th data-field="mallnum">编号</th> -->
-<!--             <th data-field="malldes">描述</th> -->
-<!--             <th data-field="price">价格</th> -->
-<!--             <th data-field="cost">原价</th> -->
-<!--             <th data-field="malltype">类型</th> -->
-<!--             <th data-field="mallcolor">颜色</th> -->
-<!--             <th data-field="mallbrand">品牌</th> -->
-<!--             <th data-field="picPath">图片</th> -->
-<!--         </tr> -->
-<!--     	</thead> -->
+			<div style="margin-left:1%">
+			<table class="table table-hover" id="table">
+    	<thead>
+        <tr>
+            <th data-field="mallid">商品ID</th>
+            <th data-field="mallnum">编号</th>
+            <th data-field="malldes">描述</th>
+            <th data-field="price">价格</th>
+            <th data-field="cost">原价</th>
+            <th data-field="malltype">类型</th>
+            <th data-field="mallcolor">颜色</th>
+            <th data-field="mallbrand">品牌</th>
+            <th data-field="picPath">图片</th>
+        </tr>
+    	</thead>
 			</table>
 			</div>
 			<!-- 表格结束 -->
@@ -247,68 +251,13 @@
 	
 	<script src="../assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="../assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
-	<script src="../assets/vendor/chartist/js/chartist.min.js"></script>
+<!-- 	<script src="../assets/vendor/chartist/js/chartist.min.js"></script> -->
 	<script src="../assets/scripts/klorofil-common.js"></script>
 	<script src="../assets/scripts/fileinput.js"></script>
 	<script src="../assets/scripts/zh.js"></script>
 	<script>
 	<!--   -->
-// 		$('#table').bootstrapTable({
-//             url: 'http://localhost:8888/shoes/mall/mallTable',         //请求后台的URL（*）
-//             method: 'post',                      //请求方式（*）
-//             toolbar: '#toolbar',                //工具按钮用哪个容器
-//             striped: true,                      //是否显示行间隔色
-//             cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-//             pagination: true,                   //是否显示分页（*）
-//             sortable: false,                     //是否启用排序
-//             sortOrder: "asc",                   //排序方式
-//             queryParams: oTableInit.queryParams,//传递参数（*）
-//             sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
-//             pageNumber:1,                       //初始化加载第一页，默认第一页
-//             pageSize: 10,                       //每页的记录行数（*）
-//             pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
-//             search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
-//             strictSearch: true,
-//             showColumns: true,                  //是否显示所有的列
-//             showRefresh: true,                  //是否显示刷新按钮
-//             minimumCountColumns: 2,             //最少允许的列数
-//             clickToSelect: true,                //是否启用点击选中行
-//             height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-//             uniqueId: "mallid",                     //每一行的唯一标识，一般为主键列
-//             showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
-//             cardView: false,                    //是否显示详细视图
-//             detailView: false,                   //是否显示父子表
-//             columns: [{
-//                 checkbox: true
-//             }, {
-//                 field: 'mallid',
-//                 title: '商品ID'
-//             }, {
-//                 field: 'mallnum',
-//                 title: '编号'
-//             }, {
-//                 field: 'malldes',
-//                 title: '描述'
-//             }, {
-//                 field: 'price',
-//                 title: '价格'
-//             },  {
-//                 field: 'cost',
-//                 title: '原价'
-//             }, {
-//                 field: 'malltype',
-//                 title: '类型'
-//             }, {
-//                 field: 'mallcolor',
-//                 title: '颜色'
-//             }, {
-//                 field: 'mallbrand',
-//                 title: '品牌'
-//             }, {
-//                 field: 'picPath',
-//                 title: '图片'
-//             },]
-//         });
+		
 	$(function () {
         var picker1 = $('#datetimepicker1').datetimepicker({
             format: 'YYYY-MM-DD',
@@ -327,7 +276,80 @@
         picker2.on('dp.change', function (e) {
             picker1.data('DateTimePicker').maxDate(e.date);
         });
+        initTable();
     });
+	
+	function tableHeight() {
+        return $(window).height() - 50;
+    };
+	function initTable() {
+// 		alert(1);
+		$(window).resize(function() {
+            $('#mytab').bootstrapTable('resetView', {
+                height: tableHeight()
+            })
+        })
+
+		$('#table').bootstrapTable({
+            url: 'http://localhost:8888/shoes/mall/mallTable',         //请求后台的URL（*）
+            method: 'post',                      //请求方式（*）
+            toolbar: '#toolbar',                //工具按钮用哪个容器
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: true,                   //是否显示分页（*）
+            sortable: false,                     //是否启用排序
+            sortOrder: "asc",                   //排序方式
+//             queryParams: oTableInit.queryParams,//传递参数（*）
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber:1,                       //初始化加载第一页，默认第一页
+            pageSize: 10,                       //每页的记录行数（*）
+            pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+            search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+            strictSearch: true,
+            showColumns: true,                  //是否显示所有的列
+            showRefresh: true,                  //是否显示刷新按钮
+            minimumCountColumns: 2,             //最少允许的列数
+            clickToSelect: true,                //是否启用点击选中行
+            height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "mallid",                     //每一行的唯一标识，一般为主键列
+            showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                    //是否显示详细视图
+            detailView: false,                   //是否显示父子表
+            columns: [
+            	{
+                field: 'mallid',
+                title: '商品ID'
+            }, {
+                field: 'mallnum',
+                title: '编号'
+            }, {
+                field: 'malldes',
+                title: '描述'
+            }, {
+                field: 'price',
+                title: '价格'
+            },  {
+                field: 'cost',
+                title: '原价'
+            }, {
+                field: 'malltype',
+                title: '类型'
+            }, {
+                field: 'mallcolor',
+                title: '颜色'
+            }, {
+                field: 'mallbrand',
+                title: '品牌'
+            }, {
+                field: 'picPath',
+                title: '图片',
+                formatter:function (value,row,index)
+                {
+                    return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
+                }
+            },]
+        });
+	}
 	function sousuo() {
 		alert(1);
 		var data=$('#sousuo').serialize();

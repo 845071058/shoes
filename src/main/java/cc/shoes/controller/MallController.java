@@ -39,6 +39,7 @@ public class MallController {
 
 	@PostMapping("/mallTable")
 	public List<MallVo> findAllMalls() {
+		System.out.println(111111);
 		return mallService.findAllMalls();
 	}
 }

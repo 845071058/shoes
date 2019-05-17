@@ -63,7 +63,7 @@ public class PicController {
 				String fileName = filePath + newName;
 				// 2、把前端输入信息，包括图片的url保存到数据库
 				Picture pic = new Picture();
-				if (1 == i) {
+				if (0 == i) {
 					pic.setIsfirst(1);
 				}
 				/**
