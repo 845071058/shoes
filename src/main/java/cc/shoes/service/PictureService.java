@@ -1,8 +1,8 @@
 package cc.shoes.service;
 
-import cc.shoes.entity.Picture;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface PictureService {
 
-	int addPicture(Picture record);
+	boolean addPicture(int mallId, MultipartFile[] PicArr);
 }
