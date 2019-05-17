@@ -51,8 +51,6 @@ public class PictureServiceImpl implements PictureService {
 				newName = newName + oldName.substring(oldName.lastIndexOf("."));
 				// 1.3生成文件在服务器端存储的子目录
 				String filePath = new DateTime().toString("yyyyMMdd");
-				System.out.println(host);
-				System.out.println(port);
 				int porti = Integer.parseInt(port);
 				String fileName = filePath + newName;
 				// 2、把前端输入信息，包括图片的url保存到数据库
