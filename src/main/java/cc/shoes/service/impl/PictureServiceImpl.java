@@ -33,11 +33,15 @@ public class PictureServiceImpl implements PictureService {
 	// 访问图片时的基础url
 	@Value("${IMAGE.BASE.URL}")
 	private String baseUrl;
+	@Value("${IMA.WIDTH}")
+	private int width;
+	@Value("${IMA.HEIGHT}")
+	private int height;
 
 	@Autowired
 	private PictureMapper picMapper;
 
-	public boolean addPicture(int mallId, MultipartFile[] PicArr) {
+	public boolean addPicture(int mallId, MultipartFile[] PicArr) throws Exception {
 
 		try {
 			int b = 0;
@@ -47,13 +51,13 @@ public class PictureServiceImpl implements PictureService {
 				// 1.1获取原始文件名
 				String oldName = uploadFile.getOriginalFilename();
 				// 1.2使用IDUtils工具类生成新的文件名，新文件名 = newName + 文件后缀
+				String imaSuffix = oldName.substring(oldName.lastIndexOf("."));
 				String newName = IDUtils.genImageName();
-				newName = newName + oldName.substring(oldName.lastIndexOf("."));
-				// 1.3生成文件在服务器端存储的子目录
+				newName = newName + imaSuffix;
 				String filePath = new DateTime().toString("yyyyMMdd");
 				int porti = Integer.parseInt(port);
 				String fileName = filePath + newName;
-				// 2、把前端输入信息，包括图片的url保存到数据库
+				InputStream input = FtpTool.resetWidAndHet(uploadFile, width, height, imaSuffix);
 				Picture pic = new Picture();
 				if (0 == i) {
 					pic.setIsfirst(1);
@@ -62,10 +66,6 @@ public class PictureServiceImpl implements PictureService {
 				pic.setMallid(mallId);
 				pic.setPicpath(baseUrl + "/" + filePath + newName);
 				pic.setUpdatetime(new Date());
-				// 3、把图片上传到图片服务器
-				// 3.1获取上传的io流
-				InputStream input = uploadFile.getInputStream();
-				// 3.2调用FtpUtil工具类进行上传
 				boolean boo = FtpTool.upload(host, porti, userName, passWord, basePath, input, fileName);
 				if (boo) {
 					picMapper.insert(pic);

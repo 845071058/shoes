@@ -37,13 +37,20 @@ public class PicController {
 	@PostMapping("/upload")
 	public ResponseResult uploadPic(Integer mallId, HttpServletRequest request, @RequestParam MultipartFile[] PicArr) {
 		ResponseResult result = new ResponseResult();
-		boolean boo = pictureService.addPicture(mallId, PicArr);
-		if (boo) {
-			result.setCode(0);
-			result.setMsg("OK");
-		} else {
+		boolean boo;
+		try {
+			boo = pictureService.addPicture(mallId, PicArr);
+			if (boo) {
+				result.setCode(0);
+				result.setMsg("OK");
+			} else {
+				result.setCode(1);
+				result.setMsg("error");
+			}
+		} catch (Exception e) {
 			result.setCode(1);
 			result.setMsg("error");
+			e.printStackTrace();
 		}
 		return result;
 	}
