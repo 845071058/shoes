@@ -37,7 +37,7 @@ public class FtpTool {
 	 * @param username    用户名
 	 * @param password    密码
 	 * @param workingPath 服务器的工作目
-	 * @param inputStream 要上传文件的输入流
+	 * @param inputStream 要上传文件的 输入流
 	 * @param saveName    设置上传之后的文件名
 	 * @return
 	 */
