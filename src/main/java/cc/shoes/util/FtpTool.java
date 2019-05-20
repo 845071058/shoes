@@ -16,16 +16,6 @@ import org.apache.log4j.Logger;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * 通过FTP上传文件
- *
- * @Author lvhaibao
- * @Date 2018/2/11 21:43
- */
-/**
- * @author Administrator
- *
- */
-/**
  * @author Administrator
  *
  */

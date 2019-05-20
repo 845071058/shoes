@@ -1,12 +1,11 @@
 package cc.shoes.common;
 
-
 public class ResponseResult {
 
 	private int code;
-	
+
 	private String msg;
-	
+
 	private Object data;
 
 	public int getCode() {
@@ -32,6 +31,5 @@ public class ResponseResult {
 	public void setData(Object data) {
 		this.data = data;
 	}
-	
-	
+
 }
