@@ -32,4 +32,11 @@ public interface MallMapper {
 	int updateByPrimaryKey(Mall record);
 
 	List<MallVo> findAllMalls();
+
+	/**
+	 * 查询轮播mall
+	 * 
+	 * @return
+	 */
+	List<MallVo> findRecommends();
 }

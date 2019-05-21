@@ -58,6 +58,12 @@
 	    <artifactId>mybatis</artifactId>
 	    <version>3.4.1</version>
 	</dependency>
+	<!-- mybatis生成 jar包 -->
+	<dependency>    
+     <groupId>org.mybatis.generator</groupId>
+     <artifactId>mybatis-generator-core</artifactId>
+     <version>1.3.7</version>
+	</dependency>
     
     <!-- 4.Mybatis和spring的整合包 -->
 	<dependency>
