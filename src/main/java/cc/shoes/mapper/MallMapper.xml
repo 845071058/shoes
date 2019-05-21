@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.shoes.mapper.MallMapper">
+  <resultMap id="BaseResultMap" type="cc.shoes.entity.Mall">
+    <id column="mallId" jdbcType="INTEGER" property="mallId" />
+    <result column="mallNum" jdbcType="VARCHAR" property="mallNum" />
+    <result column="mallDes" jdbcType="VARCHAR" property="mallDes" />
+    <result column="currentPrice" jdbcType="INTEGER" property="currentPrice" />
+    <result column="costPrice" jdbcType="INTEGER" property="costPrice" />
+    <result column="mallType" jdbcType="INTEGER" property="mallType" />
+    <result column="mallColor" jdbcType="INTEGER" property="mallColor" />
+    <result column="mallBrand" jdbcType="INTEGER" property="mallBrand" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="isRecommend" jdbcType="INTEGER" property="isRecommend" />
+    <result column="parentPrice" jdbcType="INTEGER" property="parentPrice" />
+    <result column="discount" jdbcType="DOUBLE" property="discount" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    mallId, mallNum, mallDes, currentPrice, costPrice, mallType, mallColor, mallBrand, 
+    createTime, updateTime, isRecommend, parentPrice, discount
+  </sql>
+  <select id="selectByExample" parameterType="cc.shoes.entity.MallExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from mall
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall
+    where mallId = #{mallId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mall
+    where mallId = #{mallId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cc.shoes.entity.MallExample">
+    delete from mall
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cc.shoes.entity.Mall">
+    insert into mall (mallId, mallNum, mallDes, 
+      currentPrice, costPrice, mallType, 
+      mallColor, mallBrand, createTime, 
+      updateTime, isRecommend, parentPrice, 
+      discount)
+    values (#{mallId,jdbcType=INTEGER}, #{mallNum,jdbcType=VARCHAR}, #{mallDes,jdbcType=VARCHAR}, 
+      #{currentPrice,jdbcType=INTEGER}, #{costPrice,jdbcType=INTEGER}, #{mallType,jdbcType=INTEGER}, 
+      #{mallColor,jdbcType=INTEGER}, #{mallBrand,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{isRecommend,jdbcType=INTEGER}, #{parentPrice,jdbcType=INTEGER}, 
+      #{discount,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="cc.shoes.entity.Mall">
+    insert into mall
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mallId != null">
+        mallId,
+      </if>
+      <if test="mallNum != null">
+        mallNum,
+      </if>
+      <if test="mallDes != null">
+        mallDes,
+      </if>
+      <if test="currentPrice != null">
+        currentPrice,
+      </if>
+      <if test="costPrice != null">
+        costPrice,
+      </if>
+      <if test="mallType != null">
+        mallType,
+      </if>
+      <if test="mallColor != null">
+        mallColor,
+      </if>
+      <if test="mallBrand != null">
+        mallBrand,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="updateTime != null">
+        updateTime,
+      </if>
+      <if test="isRecommend != null">
+        isRecommend,
+      </if>
+      <if test="parentPrice != null">
+        parentPrice,
+      </if>
+      <if test="discount != null">
+        discount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mallId != null">
+        #{mallId,jdbcType=INTEGER},
+      </if>
+      <if test="mallNum != null">
+        #{mallNum,jdbcType=VARCHAR},
+      </if>
+      <if test="mallDes != null">
+        #{mallDes,jdbcType=VARCHAR},
+      </if>
+      <if test="currentPrice != null">
+        #{currentPrice,jdbcType=INTEGER},
+      </if>
+      <if test="costPrice != null">
+        #{costPrice,jdbcType=INTEGER},
+      </if>
+      <if test="mallType != null">
+        #{mallType,jdbcType=INTEGER},
+      </if>
+      <if test="mallColor != null">
+        #{mallColor,jdbcType=INTEGER},
+      </if>
+      <if test="mallBrand != null">
+        #{mallBrand,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isRecommend != null">
+        #{isRecommend,jdbcType=INTEGER},
+      </if>
+      <if test="parentPrice != null">
+        #{parentPrice,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null">
+        #{discount,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cc.shoes.entity.MallExample" resultType="java.lang.Long">
+    select count(*) from mall
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mall
+    <set>
+      <if test="record.mallId != null">
+        mallId = #{record.mallId,jdbcType=INTEGER},
+      </if>
+      <if test="record.mallNum != null">
+        mallNum = #{record.mallNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mallDes != null">
+        mallDes = #{record.mallDes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentPrice != null">
+        currentPrice = #{record.currentPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.costPrice != null">
+        costPrice = #{record.costPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.mallType != null">
+        mallType = #{record.mallType,jdbcType=INTEGER},
+      </if>
+      <if test="record.mallColor != null">
+        mallColor = #{record.mallColor,jdbcType=INTEGER},
+      </if>
+      <if test="record.mallBrand != null">
+        mallBrand = #{record.mallBrand,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        updateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isRecommend != null">
+        isRecommend = #{record.isRecommend,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentPrice != null">
+        parentPrice = #{record.parentPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.discount != null">
+        discount = #{record.discount,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mall
+    set mallId = #{record.mallId,jdbcType=INTEGER},
+      mallNum = #{record.mallNum,jdbcType=VARCHAR},
+      mallDes = #{record.mallDes,jdbcType=VARCHAR},
+      currentPrice = #{record.currentPrice,jdbcType=INTEGER},
+      costPrice = #{record.costPrice,jdbcType=INTEGER},
+      mallType = #{record.mallType,jdbcType=INTEGER},
+      mallColor = #{record.mallColor,jdbcType=INTEGER},
+      mallBrand = #{record.mallBrand,jdbcType=INTEGER},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+      isRecommend = #{record.isRecommend,jdbcType=INTEGER},
+      parentPrice = #{record.parentPrice,jdbcType=INTEGER},
+      discount = #{record.discount,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cc.shoes.entity.Mall">
+    update mall
+    <set>
+      <if test="mallNum != null">
+        mallNum = #{mallNum,jdbcType=VARCHAR},
+      </if>
+      <if test="mallDes != null">
+        mallDes = #{mallDes,jdbcType=VARCHAR},
+      </if>
+      <if test="currentPrice != null">
+        currentPrice = #{currentPrice,jdbcType=INTEGER},
+      </if>
+      <if test="costPrice != null">
+        costPrice = #{costPrice,jdbcType=INTEGER},
+      </if>
+      <if test="mallType != null">
+        mallType = #{mallType,jdbcType=INTEGER},
+      </if>
+      <if test="mallColor != null">
+        mallColor = #{mallColor,jdbcType=INTEGER},
+      </if>
+      <if test="mallBrand != null">
+        mallBrand = #{mallBrand,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isRecommend != null">
+        isRecommend = #{isRecommend,jdbcType=INTEGER},
+      </if>
+      <if test="parentPrice != null">
+        parentPrice = #{parentPrice,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null">
+        discount = #{discount,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where mallId = #{mallId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cc.shoes.entity.Mall">
+    update mall
+    set mallNum = #{mallNum,jdbcType=VARCHAR},
+      mallDes = #{mallDes,jdbcType=VARCHAR},
+      currentPrice = #{currentPrice,jdbcType=INTEGER},
+      costPrice = #{costPrice,jdbcType=INTEGER},
+      mallType = #{mallType,jdbcType=INTEGER},
+      mallColor = #{mallColor,jdbcType=INTEGER},
+      mallBrand = #{mallBrand,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      isRecommend = #{isRecommend,jdbcType=INTEGER},
+      parentPrice = #{parentPrice,jdbcType=INTEGER},
+      discount = #{discount,jdbcType=DOUBLE}
+    where mallId = #{mallId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="findAllMalls" resultType="cc.shoes.entity.vo.MallVo">
+  SELECT * FROM picture p  JOIN mall m on p.mallId = m.mallId and p.isFirst = '1'
+  </select>
+</mapper>

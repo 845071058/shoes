@@ -22,7 +22,7 @@ public class MallServiceImpl implements MallService {
 	public int addMall(Mall mall) {
 
 		mallMapper.insert(mall);
-		int mallId = mall.getMallid();
+		int mallId = mall.getMallId();
 		return mallId;
 	}
 
