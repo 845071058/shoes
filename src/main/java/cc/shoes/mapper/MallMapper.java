@@ -33,10 +33,4 @@ public interface MallMapper {
 
 	List<MallVo> findAllMalls();
 
-	/**
-	 * 查询轮播mall
-	 * 
-	 * @return
-	 */
-	List<MallVo> findRecommends();
 }

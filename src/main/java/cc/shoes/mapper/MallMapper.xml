@@ -341,7 +341,4 @@
   SELECT * FROM picture p  JOIN mall m on p.mallId = m.mallId and p.isFirst = '1'
   </select>
   
-  <select id="findRecommends" resultType="cc.shoes.entity.vo.MallVo">
-  SELECT * FROM picture p  JOIN mall m on p.mallId = m.mallId and p.isFirst = '1' and m.isRecommend = '1'
-  </select>
 </mapper>

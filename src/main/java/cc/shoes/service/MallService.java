@@ -11,4 +11,6 @@ public interface MallService {
 
 	List<MallVo> findAllMalls();
 
+	MallVo seleteMallDetail(Integer mallId);
+
 }

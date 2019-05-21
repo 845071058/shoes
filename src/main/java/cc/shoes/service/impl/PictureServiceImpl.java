@@ -3,6 +3,7 @@ package cc.shoes.service.impl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +84,13 @@ public class PictureServiceImpl implements PictureService {
 			return false;
 
 		}
+	}
+
+	/**
+	 * 首页轮播图
+	 */
+	public List<Picture> selectRecommedMall() {
+		return picMapper.findRecommends();
 	}
 
 }
