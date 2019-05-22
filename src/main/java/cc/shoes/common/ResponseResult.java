@@ -1,5 +1,11 @@
 package cc.shoes.common;
 
+/**
+ * 返回类
+ * 
+ * @author Administrator
+ *
+ */
 public class ResponseResult {
 
 	private int code;
