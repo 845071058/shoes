@@ -127,7 +127,7 @@ public class MallController {
 	 * @param mallId
 	 * @return
 	 */
-	@RequestMapping("/delMall")
+	@PostMapping("/delMall")
 	public ResponseResult delMall(Integer mallId) {
 		ResponseResult result = new ResponseResult();
 		boolean b = mallService.deleteMall(mallId);
@@ -147,7 +147,7 @@ public class MallController {
 	 * @param condition
 	 * @return
 	 */
-	@RequestMapping("/findMalls")
+	@PostMapping("/findMalls")
 	public ResponseResult findMalls(MallCondition condition) {
 		ResponseResult result = new ResponseResult();
 		List<MallVo> list = mallService.findMallsForManager(condition);
