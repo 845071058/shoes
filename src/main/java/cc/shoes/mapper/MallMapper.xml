@@ -338,7 +338,40 @@
   </update>
   
   <select id="findAllMalls" resultType="cc.shoes.entity.vo.MallVo">
-  SELECT * FROM picture p  JOIN mall m on p.mallId = m.mallId and p.isFirst = '1'
+  SELECT m.mallId,
+  m.mallNum as mallNum,
+  m.mallDes as mallDes,
+  m.currentPrice as currentPrice,
+  m.createTime as createTime,
+  m.parentPrice as parentPrice,
+  m.discount as discount,
+  p.picPath as picPath
+   FROM picture p  JOIN mall m on p.mallId = m.mallId and p.isFirst = '1'
+  </select>
+  
+   <select id="findMallsForManager" resultType="cc.shoes.entity.vo.MallVo">
+  SELECT *
+   FROM picture p  JOIN mall m on p.mallId = m.mallId and p.isFirst = '1'
+  </select>
+  
+  <select id="findMallsByConditon" resultType="cc.shoes.entity.vo.MallVo" parameterType="cc.shoes.entity.vo.MallCondition">
+  SELECT *
+   FROM picture p  JOIN mall m on p.mallId = m.mallId and p.isFirst = '1'
+   <set>
+   <if test="maxPrice != null">
+   and p.currentPrice &lt;= #{maxPrice,jdbcType=INTEGER},
+   </if>
+   <if test="minPrice != null">
+   and p.currentPrice &gt;= #{maxPrice,jdbcType=INTEGER},
+   </if>
+   <if test="date != null">
+   and p.createTime = #{date},
+   </if>
+   <if test="keyWord != null">
+   and p.mallDes like CONCAT(CONCAT('%',#{keyWord}),%)
+   </if>
+   
+   </set>
   </select>
   
 </mapper>

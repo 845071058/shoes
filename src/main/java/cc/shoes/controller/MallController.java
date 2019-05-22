@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cc.shoes.common.ResponseResult;
 import cc.shoes.entity.Mall;
+import cc.shoes.entity.Picture;
+import cc.shoes.entity.vo.MallCondition;
 import cc.shoes.entity.vo.MallVo;
 import cc.shoes.service.MallService;
 import cc.shoes.service.PictureService;
@@ -37,9 +39,121 @@ public class MallController {
 		return result;
 	}
 
+	/**
+	 * 图片下拉列表
+	 * 
+	 * @return
+	 */
 	@PostMapping("/mallTable")
-	public List<MallVo> findAllMalls() {
+	public ResponseResult findAllMalls() {
 		System.out.println(111111);
-		return mallService.findAllMalls();
+		ResponseResult result = new ResponseResult();
+		List<MallVo> list = mallService.findAllMalls();
+		if (null != list && list.size() > 0) {
+			result.setCode(200);
+			result.setData(list);
+			result.setMsg("OK");
+		} else {
+			result.setCode(400);
+			result.setMsg("NO data");
+		}
+		return result;
+	}
+
+	/**
+	 * 首页轮播图
+	 * 
+	 * @return
+	 */
+	@PostMapping("/recommendMalls")
+	public ResponseResult findRecommendMalls() {
+		ResponseResult result = new ResponseResult();
+		List<Picture> list = pictureService.selectRecommendMalls();
+		if (null != list && list.size() > 0) {
+			result.setCode(200);
+			result.setData(list);
+			result.setMsg("OK");
+		} else {
+			result.setCode(400);
+			result.setMsg("NO data");
+		}
+		return result;
+	}
+
+	/**
+	 * ToRecommend
+	 * 
+	 * @param mallId
+	 * @return
+	 */
+	@PostMapping("/toRecommend")
+	public ResponseResult toRecommend(Integer mallId) {
+		ResponseResult result = new ResponseResult();
+		int count = mallService.updateMallToRecommend(mallId);
+		if (count == 1) {
+			result.setCode(200);
+			result.setMsg("OK");
+		} else {
+			result.setCode(400);
+			result.setMsg("no data");
+		}
+		return result;
+
+	}
+
+	/**
+	 * ToUnRecommend
+	 * 
+	 * @param mallId
+	 * @return
+	 */
+	@PostMapping("/toUnRecommend")
+	public ResponseResult toUnRecommend(Integer mallId) {
+		ResponseResult result = new ResponseResult();
+		int count = mallService.updateMallToUnRecommend(mallId);
+		if (count == 1) {
+			result.setCode(200);
+			result.setMsg("OK");
+		} else {
+			result.setCode(400);
+			result.setMsg("no data");
+		}
+		return result;
+	}
+
+	/**
+	 * delMall
+	 * 
+	 * @param mallId
+	 * @return
+	 */
+	@RequestMapping("/delMall")
+	public ResponseResult delMall(Integer mallId) {
+		ResponseResult result = new ResponseResult();
+		boolean b = mallService.deleteMall(mallId);
+		if (b) {
+			result.setCode(200);
+			result.setMsg("OK");
+		} else {
+			result.setCode(400);
+			result.setMsg("Error");
+		}
+		return result;
+	}
+
+	/**
+	 * manager find malls by condition
+	 * 
+	 * @param condition
+	 * @return
+	 */
+	@RequestMapping("/findMalls")
+	public ResponseResult findMalls(MallCondition condition) {
+		ResponseResult result = new ResponseResult();
+		List<MallVo> list = mallService.findMallsForManager(condition);
+		result.setCode(200);
+		result.setData(list);
+		result.setMsg("OK");
+		return result;
 	}
 }

@@ -35,6 +35,6 @@ public interface PictureMapper {
 	 * 
 	 * @return
 	 */
-	List<Picture> findRecommends();
+	List<Picture> selectRecommendMalls();
 
 }

@@ -10,6 +10,7 @@ import cc.shoes.entity.Mall;
 import cc.shoes.entity.Picture;
 import cc.shoes.entity.PictureExample;
 import cc.shoes.entity.PictureExample.Criteria;
+import cc.shoes.entity.vo.MallCondition;
 import cc.shoes.entity.vo.MallVo;
 import cc.shoes.mapper.MallMapper;
 import cc.shoes.mapper.PictureMapper;
@@ -33,6 +34,9 @@ public class MallServiceImpl implements MallService {
 		return mallId;
 	}
 
+	/**
+	 * 下方列表
+	 */
 	public List<MallVo> findAllMalls() {
 		return mallMapper.findAllMalls();
 	}
@@ -56,6 +60,56 @@ public class MallServiceImpl implements MallService {
 			mallVo.setPicPaths(picPaths);
 		}
 		return mallVo;
+	}
+
+	/**
+	 * 改为Recommend
+	 */
+	public int updateMallToRecommend(Integer mallId) {
+		Mall mall = mallMapper.selectByPrimaryKey(mallId);
+		int result = 0;
+		if (null != mall && mall.getIsRecommend() != 1) {
+			mall.setIsRecommend(1);
+			result = mallMapper.updateByPrimaryKey(mall);
+		}
+		return result;
+
+	}
+
+	/**
+	 * 改为UnRecommend
+	 */
+	public int updateMallToUnRecommend(Integer mallId) {
+		Mall mall = mallMapper.selectByPrimaryKey(mallId);
+		int result = 0;
+		if (null != mall && mall.getIsRecommend() == 1) {
+			mall.setIsRecommend(2);
+			result = mallMapper.updateByPrimaryKey(mall);
+		}
+		return result;
+	}
+
+	/**
+	 * 此处可以修改 后台管理条件查询
+	 */
+	public List<MallVo> findMallsForManager(MallCondition condition) {
+		if (null != condition) {
+			return mallMapper.findMallsByConditon(condition);
+		} else
+			return mallMapper.findMallsForManager();
+	}
+
+	/**
+	 * delmall
+	 */
+	public boolean deleteMall(Integer mallId) {
+		PictureExample example = new PictureExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andMallidEqualTo(mallId);
+		mallMapper.deleteByPrimaryKey(mallId);
+		picMapper.deleteByExample(example);
+		return true;
+
 	}
 
 }

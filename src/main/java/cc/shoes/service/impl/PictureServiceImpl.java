@@ -89,8 +89,8 @@ public class PictureServiceImpl implements PictureService {
 	/**
 	 * 首页轮播图
 	 */
-	public List<Picture> selectRecommedMall() {
-		return picMapper.findRecommends();
+	public List<Picture> selectRecommendMalls() {
+		return picMapper.selectRecommendMalls();
 	}
 
 }

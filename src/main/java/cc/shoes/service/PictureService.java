@@ -10,6 +10,6 @@ public interface PictureService {
 
 	boolean addPicture(int mallId, MultipartFile[] PicArr) throws Exception;
 
-	List<Picture> selectRecommedMall();
+	List<Picture> selectRecommendMalls();
 
 }

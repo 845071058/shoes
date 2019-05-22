@@ -242,7 +242,8 @@
     where picId = #{picid,jdbcType=INTEGER}
   </update>
   
-   <select id="findRecommends" resultType="cc.shoes.entity.Picture">
+   <select id="selectRecommendMalls" resultType="cc.shoes.entity.Picture">
+<!--    isFirst可能要改 -->
   SELECT p.* FROM picture p  JOIN mall m on p.mallId = m.mallId and p.isFirst = '1' and m.isRecommend = '1'
   </select>
 </mapper>
