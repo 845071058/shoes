@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import cc.shoes.common.ResonseMsg;
+import cc.shoes.common.ResponseCode;
 import cc.shoes.common.ResponseResult;
 import cc.shoes.service.PictureService;
 
@@ -25,15 +27,15 @@ public class PicController {
 		try {
 			boo = pictureService.addPicture(mallId, PicArr);
 			if (boo) {
-				result.setCode(0);
-				result.setMsg("OK");
+				result.setCode(ResponseCode.SUCCESS);
+				result.setMsg(ResonseMsg.SUCCESS);
 			} else {
-				result.setCode(1);
-				result.setMsg("error");
+				result.setCode(ResponseCode.ERROR);
+				result.setMsg(ResonseMsg.ERROR);
 			}
 		} catch (Exception e) {
-			result.setCode(1);
-			result.setMsg("error");
+			result.setCode(ResponseCode.ERROR);
+			result.setMsg(ResonseMsg.ERROR);
 			e.printStackTrace();
 		}
 		return result;

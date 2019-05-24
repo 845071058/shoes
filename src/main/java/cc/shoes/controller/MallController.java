@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import cc.shoes.common.ResonseMsg;
+import cc.shoes.common.ResponseCode;
 import cc.shoes.common.ResponseResult;
 import cc.shoes.entity.Mall;
 import cc.shoes.entity.Picture;
@@ -30,8 +32,8 @@ public class MallController {
 		int addResult = mallService.addMall(mall);
 //		if (1 == addResult) {
 		result.setData(addResult);
-		result.setCode(0);
-		result.setMsg("添加成功");
+		result.setCode(ResponseCode.SUCCESS);
+		result.setMsg(ResonseMsg.SUCCESS);
 //		} else {
 //			result.setCode(2);
 //			result.setMsg("添加失败");
@@ -50,12 +52,12 @@ public class MallController {
 		ResponseResult result = new ResponseResult();
 		List<MallVo> list = mallService.findAllMalls();
 		if (null != list && list.size() > 0) {
-			result.setCode(200);
+			result.setCode(ResponseCode.SUCCESS);
 			result.setData(list);
-			result.setMsg("OK");
+			result.setMsg(ResonseMsg.SUCCESS);
 		} else {
-			result.setCode(400);
-			result.setMsg("NO data");
+			result.setCode(ResponseCode.ERROR);
+			result.setMsg(ResonseMsg.NODATA);
 		}
 		return result;
 	}
@@ -70,12 +72,12 @@ public class MallController {
 		ResponseResult result = new ResponseResult();
 		List<Picture> list = pictureService.selectRecommendMalls();
 		if (null != list && list.size() > 0) {
-			result.setCode(200);
+			result.setCode(ResponseCode.SUCCESS);
 			result.setData(list);
-			result.setMsg("OK");
+			result.setMsg(ResonseMsg.SUCCESS);
 		} else {
-			result.setCode(400);
-			result.setMsg("NO data");
+			result.setCode(ResponseCode.ERROR);
+			result.setMsg(ResonseMsg.NODATA);
 		}
 		return result;
 	}
@@ -91,11 +93,11 @@ public class MallController {
 		ResponseResult result = new ResponseResult();
 		int count = mallService.updateMallToRecommend(mallId);
 		if (count == 1) {
-			result.setCode(200);
-			result.setMsg("OK");
+			result.setCode(ResponseCode.SUCCESS);
+			result.setMsg(ResonseMsg.SUCCESS);
 		} else {
-			result.setCode(400);
-			result.setMsg("no data");
+			result.setCode(ResponseCode.ERROR);
+			result.setMsg(ResonseMsg.NODATA);
 		}
 		return result;
 
@@ -112,11 +114,11 @@ public class MallController {
 		ResponseResult result = new ResponseResult();
 		int count = mallService.updateMallToUnRecommend(mallId);
 		if (count == 1) {
-			result.setCode(200);
-			result.setMsg("OK");
+			result.setCode(ResponseCode.SUCCESS);
+			result.setMsg(ResonseMsg.SUCCESS);
 		} else {
-			result.setCode(400);
-			result.setMsg("no data");
+			result.setCode(ResponseCode.ERROR);
+			result.setMsg(ResonseMsg.NODATA);
 		}
 		return result;
 	}
@@ -132,11 +134,11 @@ public class MallController {
 		ResponseResult result = new ResponseResult();
 		boolean b = mallService.deleteMall(mallId);
 		if (b) {
-			result.setCode(200);
-			result.setMsg("OK");
+			result.setCode(ResponseCode.SUCCESS);
+			result.setMsg(ResonseMsg.SUCCESS);
 		} else {
-			result.setCode(400);
-			result.setMsg("Error");
+			result.setCode(ResponseCode.ERROR);
+			result.setMsg(ResonseMsg.ERROR);
 		}
 		return result;
 	}
@@ -151,9 +153,9 @@ public class MallController {
 	public ResponseResult findMalls(MallCondition condition) {
 		ResponseResult result = new ResponseResult();
 		List<MallVo> list = mallService.findMallsForManager(condition);
-		result.setCode(200);
+		result.setCode(ResponseCode.SUCCESS);
 		result.setData(list);
-		result.setMsg("OK");
+		result.setMsg(ResonseMsg.SUCCESS);
 		return result;
 	}
 }

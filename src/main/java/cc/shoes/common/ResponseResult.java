@@ -8,25 +8,25 @@ package cc.shoes.common;
  */
 public class ResponseResult {
 
-	private int code;
+	private ResponseCode code;
 
-	private String msg;
+	private ResonseMsg msg;
 
 	private Object data;
 
-	public int getCode() {
+	public ResponseCode getCode() {
 		return code;
 	}
 
-	public void setCode(int code) {
+	public void setCode(ResponseCode code) {
 		this.code = code;
 	}
 
-	public String getMsg() {
+	public ResonseMsg getMsg() {
 		return msg;
 	}
 
-	public void setMsg(String msg) {
+	public void setMsg(ResonseMsg msg) {
 		this.msg = msg;
 	}
 
