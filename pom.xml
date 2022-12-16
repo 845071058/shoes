@@ -6,7 +6,7 @@
   <packaging>war</packaging>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<spirng.version>4.3.3.RELEASE</spirng.version>
+	<spirng.version>5.2.20.RELEASE</spirng.version>
 	<c3p0.version>0.9.1</c3p0.version>
   </properties>
    <dependencies>
